@@ -25,11 +25,18 @@ public class ArmorSlots extends JavaPlugin {
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
     
     // Console logger
-    Logger log = Logger.getLogger("Minecraft");
+    static final Logger log = Logger.getLogger("Minecraft");
     
     // Permissions
     public static PermissionHandler Permissions = null;
+    
+    // Stuff
+    public ItemStack hat;
+    public ItemStack chestplate;
+    public ItemStack leggings;
+    public ItemStack boots;
 
+    @Override
     public void onEnable() {
         PluginManager pm = getServer().getPluginManager();
         
@@ -42,9 +49,9 @@ public class ArmorSlots extends JavaPlugin {
     private void setupPermissions() {
         Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
         
-        if (this.Permissions == null) {
+        if (ArmorSlots.Permissions == null) {
             if (permissionsPlugin != null) {
-                this.Permissions = ((Permissions) permissionsPlugin).getHandler();
+                ArmorSlots.Permissions = ((Permissions) permissionsPlugin).getHandler();
             } else {
                 log.info("[ArmorSlots] Permissions system not found. Disabling.");
                 getServer().getPluginManager().disablePlugin(this);
@@ -52,6 +59,7 @@ public class ArmorSlots extends JavaPlugin {
         }
     }
     
+    @Override
     public void onDisable() {
         PluginDescriptionFile pdfFile = this.getDescription();
         System.out.println(pdfFile.getName() + " v" + pdfFile.getVersion() + " is disabled!" );
@@ -72,31 +80,46 @@ public class ArmorSlots extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         Player player = (Player)sender;
+        
         if (commandLabel.equalsIgnoreCase("hat")) {
             if (Permissions.has(player, "armorslots.hat")) {
                 if (player.getItemInHand().getTypeId() == 0) {
                     player.sendMessage(ChatColor.RED + "You have nothing in your hand!");
                     return true;
                 } else {
-                    ItemStack itemHand = player.getItemInHand();
                     PlayerInventory inventory = player.getInventory();
+                    ItemStack itemHand = player.getItemInHand();
+                    if (inventory.getHelmet().getTypeId() != 0) {
+                        hat = inventory.getHelmet();
+                    }
                     inventory.remove(itemHand);
                     inventory.setHelmet(itemHand);
+                    if (hat != null) {
+                        inventory.setItemInHand(hat);
+                    }
                     player.sendMessage(ChatColor.GREEN + "Hat set!");
+                    hat = null;
                     return true;
                 }
             }
-        } else if (commandLabel.equalsIgnoreCase("chest")) {
-            if (Permissions.has(player, "armorslots.chest")) {
+        } else if (commandLabel.equalsIgnoreCase("chestplate")) {
+            if (Permissions.has(player, "armorslots.chestplate")) {
                 if (player.getItemInHand().getTypeId() == 0) {
                     player.sendMessage(ChatColor.RED + "You have nothing in your hand!");
                     return true;
                 } else {
-                    ItemStack itemHand = player.getItemInHand();
                     PlayerInventory inventory = player.getInventory();
+                    ItemStack itemHand = player.getItemInHand();
+                    if (inventory.getChestplate().getTypeId() != 0) {
+                        chestplate = inventory.getChestplate();
+                    }
                     inventory.remove(itemHand);
                     inventory.setChestplate(itemHand);
+                    if (chestplate != null) {
+                        inventory.setItemInHand(chestplate);
+                    }
                     player.sendMessage(ChatColor.GREEN + "Chestplate set!");
+                    chestplate = null;
                     return true;
                 }
             }
@@ -106,11 +129,18 @@ public class ArmorSlots extends JavaPlugin {
                     player.sendMessage(ChatColor.RED + "You have nothing in your hand!");
                     return true;
                 } else {
-                    ItemStack itemHand = player.getItemInHand();
                     PlayerInventory inventory = player.getInventory();
+                    ItemStack itemHand = player.getItemInHand();
+                    if (inventory.getLeggings().getTypeId() != 0) {
+                        leggings = inventory.getLeggings();
+                    }
                     inventory.remove(itemHand);
                     inventory.setLeggings(itemHand);
+                    if (leggings != null) {
+                        inventory.setItemInHand(leggings);
+                    }
                     player.sendMessage(ChatColor.GREEN + "Leggings set!");
+                    leggings = null;
                     return true;
                 }
             }
@@ -120,11 +150,18 @@ public class ArmorSlots extends JavaPlugin {
                     player.sendMessage(ChatColor.RED + "You have nothing in your hand!");
                     return true;
                 } else {
-                    ItemStack itemHand = player.getItemInHand();
                     PlayerInventory inventory = player.getInventory();
+                    ItemStack itemHand = player.getItemInHand();
+                    if (inventory.getBoots().getTypeId() != 0) {
+                        boots = inventory.getBoots();
+                    }
                     inventory.remove(itemHand);
                     inventory.setBoots(itemHand);
+                    if (boots != null) {
+                        inventory.setItemInHand(boots);
+                    }
                     player.sendMessage(ChatColor.GREEN + "Boots set!");
+                    boots = null;
                     return true;
                 }
             }

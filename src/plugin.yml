@@ -1,11 +1,11 @@
 name: ArmorSlots
 main: net.pwncraft.kaikz.armorslots.ArmorSlots
-version: 1.0
+version: 1.1
 commands:
   hat:
     description: Sets the item in your hand to your head.
     usage: /<command>
-  chest:
+  chestplate:
     description: Sets the item in your hand to your chestplate.
     usage: /<command>
   leggings:
