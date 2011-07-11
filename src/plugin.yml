@@ -1,6 +1,6 @@
 name: ArmorSlots
 main: net.pwncraft.kaikz.armorslots.ArmorSlots
-version: 1.1
+version: 1.2
 commands:
   hat:
     description: Sets the item in your hand to your head.

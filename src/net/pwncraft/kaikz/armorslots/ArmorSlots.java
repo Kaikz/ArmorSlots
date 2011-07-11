@@ -8,6 +8,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.event.Event;
+import org.bukkit.event.Event.Priority;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
@@ -23,6 +25,8 @@ import org.bukkit.plugin.PluginManager;
 
 public class ArmorSlots extends JavaPlugin {
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
+    private final ASPlayerListener playerListener = new ASPlayerListener(this);
+    private final ASEntityListener entityListener = new ASEntityListener(this);
     
     // Console logger
     static final Logger log = Logger.getLogger("Minecraft");
@@ -39,6 +43,7 @@ public class ArmorSlots extends JavaPlugin {
     @Override
     public void onEnable() {
         PluginManager pm = getServer().getPluginManager();
+        pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.Normal, this);
         
         setupPermissions();
        
