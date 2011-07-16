@@ -1,6 +1,6 @@
 name: ArmorSlots
 main: net.pwncraft.kaikz.armorslots.ArmorSlots
-version: 1.2
+version: 1.3
 commands:
   hat:
     description: Sets the item in your hand to your head.
@@ -13,4 +13,7 @@ commands:
     usage: /<command>
   boots:
     description: Sets the item in your hand to your boots.
+    usage: /<command>
+  firearmor:
+    description: Looks as if you're on fire.
     usage: /<command>

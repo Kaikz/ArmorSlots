@@ -1,3 +1,20 @@
+/*
+* (Kaikz ~ http://pwncraft.net)
+*
+* THIS PLUGIN IS LICENSED UNDER THE WTFPL - (Do What The Fuck You Want To Public License)
+*
+* This program is free software. It comes without any warranty, to
+* the extent permitted by applicable law. You can redistribute it
+* and/or modify it under the terms of the Do What The Fuck You Want
+* To Public License, Version 2, as published by Sam Hocevar. See
+* http://sam.zoy.org/wtfpl/COPYING for more details.
+*
+* TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+*
+* 0. You just DO WHAT THE FUCK YOU WANT TO.
+*
+* */
+
 package net.pwncraft.kaikz.armorslots;
 
 import org.bukkit.Location;
@@ -62,47 +79,82 @@ public class ASEntityListener extends EntityListener {
         
         if ((event.getCause() == EntityDamageEvent.DamageCause.DROWNING) && ((event.getEntity() instanceof Player))) {
             Player player = (Player)event.getEntity(); event.getEntity();
-            if ((player.getInventory().getHelmet().getTypeId() == 20) || (player.getInventory().getHelmet().getTypeId() == 86)) {
-                Location loc = player.getLocation().getBlock().getLocation().add(0.0D, 1.0D, 0.0D);
-                if ((loc.getBlock().getType() == Material.STATIONARY_WATER) || (loc.getBlock().getType() == Material.WATER)) {
-                    player.setRemainingAir(player.getMaximumAir());
-                    event.setCancelled(true);
+            if (ArmorSlots.Permissions.has(player, "armorslots.scuba")) {
+                if ((player.getInventory().getHelmet().getTypeId() == 20) || (player.getInventory().getHelmet().getTypeId() == 86)) {
+                    Location loc = player.getLocation().getBlock().getLocation().add(0.0D, 1.0D, 0.0D);
+                    if ((loc.getBlock().getType() == Material.STATIONARY_WATER) || (loc.getBlock().getType() == Material.WATER)) {
+                        player.setRemainingAir(player.getMaximumAir());
+                        event.setCancelled(true);
+                    }
                 }
             }
         }
         
         if ((event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION ) && ((event.getEntity() instanceof Player))) {
             Player player = (Player)event.getEntity(); event.getEntity();
-            if ((player.getInventory().getHelmet().getTypeId() == 46)) {
-                event.setCancelled(true);
+            if (ArmorSlots.Permissions.has(player, "armorslots.explosion")) {
+                if ((player.getInventory().getHelmet().getTypeId() == 46)) {
+                    event.setCancelled(true);
+                }
             }
         }
         
         if ((event.getCause() == EntityDamageEvent.DamageCause.CONTACT ) && ((event.getEntity() instanceof Player))) {
             Player player = (Player)event.getEntity(); event.getEntity();
-            if ((player.getInventory().getHelmet().getTypeId() == 81)) {
-                event.setCancelled(true);
+            if (ArmorSlots.Permissions.has(player, "armorslots.contact")) {
+                if ((player.getInventory().getHelmet().getTypeId() == 81)) {
+                    event.setCancelled(true);
+                }
             }
         }
         
         if ((event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK ) && ((event.getEntity() instanceof Player))) {
             Player player = (Player)event.getEntity(); event.getEntity();
-            if ((player.getInventory().getHelmet().getTypeId() == 52)) {
-                event.setCancelled(true);
+            if (ArmorSlots.Permissions.has(player, "armorslots.attacked")) {
+                if ((player.getInventory().getHelmet().getTypeId() == 52)) {
+                    event.setCancelled(true);
+                }
             }
         }
         
         if ((event.getCause() == EntityDamageEvent.DamageCause.VOID ) && ((event.getEntity() instanceof Player))) {
             Player player = (Player)event.getEntity(); event.getEntity();
-            if ((player.getInventory().getHelmet().getTypeId() == 90)) {
-                event.setCancelled(true);
+            if (ArmorSlots.Permissions.has(player, "armorslots.void")) {
+                if ((player.getInventory().getHelmet().getTypeId() == 90)) {
+                    event.setCancelled(true);
+                }
+            }
+        }
+        
+        if ((event.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK ) && ((event.getEntity() instanceof Player))) {
+            Player player = (Player)event.getEntity(); event.getEntity();
+            if (ArmorSlots.Permissions.has(player, "armorslots.firearmor")) {
+                if ((ArmorSlots.fireArmor == true)) {
+                    event.setCancelled(true);
+                }
+                Location loc = player.getLocation().getBlock().getLocation().add(0.0D, 1.0D, 0.0D);
+                if ((loc.getBlock().getType() == Material.STATIONARY_WATER) || (loc.getBlock().getType() == Material.WATER)) {
+                    player.setFireTicks(0);
+                    ArmorSlots.fireArmor = false;
+                }
+            }
+        }
+        
+        if (((event.getCause() == EntityDamageEvent.DamageCause.LAVA ) || (event.getCause() == EntityDamageEvent.DamageCause.FIRE )) && (event.getEntity() instanceof Player)) {
+            Player player = (Player)event.getEntity(); event.getEntity();
+            if (ArmorSlots.Permissions.has(player, "armorslots.firearmor")) {
+                if (ArmorSlots.fireArmor == true) {
+                    event.setCancelled(true);
+                }
             }
         }
         
         if ((event.getCause() == EntityDamageEvent.DamageCause.FALL ) && ((event.getEntity() instanceof Player))) {
             Player player = (Player)event.getEntity(); event.getEntity();
-            if ((player.getInventory().getBoots().getTypeId() == 317)) {
-                event.setCancelled(true);
+            if (ArmorSlots.Permissions.has(player, "armorslots.fallboots")) {
+                if ((player.getInventory().getBoots().getTypeId() == 317)) {
+                    event.setCancelled(true);
+                }
             }
         }
     }

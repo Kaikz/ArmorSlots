@@ -10,14 +10,27 @@ Store blocks/items in your armor slots.
 - /chestplate
 - /leggings
 - /boots
+- /firearmor
 
 ### Permissions
 - armorslots.hat
 - armorslots.chestplate
 - armorslots.leggings
 - armorslots.boots
+- armorslots.firearmor (Allows fire armor)
+- armorslots.fallboots (Allows no fall damage on gold boots)
+- armorslots.void (Allows portal hat perks)
+- armorslots.contact(Allows cactus hat perks)
+- armorslots.attacked(Allows mobspawner hat perks)
+- armorslots.scuba(Allows glass/pumpkin hat perks)
+- armorslots.explosion(Allows TNT hat perks)
 
 ### Changelog:
+#### 1.3. Saturday, July 16
+- Added fire armor.
+	- Immune to fire and lava damage.
+- Added Permissions per damage nerf.
+
 #### 1.2. Monday, July 11
 - Added damage nerfs per hat equipped.
 	- Portal blocks prevent Void damage.

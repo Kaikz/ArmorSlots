@@ -1,3 +1,20 @@
+/*
+* (Kaikz ~ http://pwncraft.net)
+*
+* THIS PLUGIN IS LICENSED UNDER THE WTFPL - (Do What The Fuck You Want To Public License)
+*
+* This program is free software. It comes without any warranty, to
+* the extent permitted by applicable law. You can redistribute it
+* and/or modify it under the terms of the Do What The Fuck You Want
+* To Public License, Version 2, as published by Sam Hocevar. See
+* http://sam.zoy.org/wtfpl/COPYING for more details.
+*
+* TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+*
+* 0. You just DO WHAT THE FUCK YOU WANT TO.
+*
+* */
+
 package net.pwncraft.kaikz.armorslots;
 
 import com.nijiko.permissions.PermissionHandler;
@@ -27,6 +44,7 @@ public class ArmorSlots extends JavaPlugin {
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
     private final ASPlayerListener playerListener = new ASPlayerListener(this);
     private final ASEntityListener entityListener = new ASEntityListener(this);
+    private final ASWeatherListener weatherListener = new ASWeatherListener(this);
     
     // Console logger
     static final Logger log = Logger.getLogger("Minecraft");
@@ -39,11 +57,14 @@ public class ArmorSlots extends JavaPlugin {
     public ItemStack chestplate;
     public ItemStack leggings;
     public ItemStack boots;
+    public static boolean fireArmor = false;
 
     @Override
     public void onEnable() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Normal, this);
+        pm.registerEvent(Event.Type.WEATHER_CHANGE, weatherListener, Priority.Normal, this);
         
         setupPermissions();
        
@@ -167,6 +188,18 @@ public class ArmorSlots extends JavaPlugin {
                     }
                     player.sendMessage(ChatColor.GREEN + "Boots set!");
                     boots = null;
+                    return true;
+                }
+            }
+        } else if (commandLabel.equalsIgnoreCase("firearmor")) {
+            if (Permissions.has(player, "armorslots.firearmor")) {
+                if (fireArmor == false) {
+                    player.setFireTicks(90000);
+                    fireArmor = true;
+                    return true;
+                } else if (fireArmor == true) {
+                    player.setFireTicks(0);
+                    fireArmor = false;
                     return true;
                 }
             }
