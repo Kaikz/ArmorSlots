@@ -1,20 +1,19 @@
 /*
-* (Kaikz ~ http://pwncraft.net)
-*
-* THIS PLUGIN IS LICENSED UNDER THE WTFPL - (Do What The Fuck You Want To Public License)
-*
-* This program is free software. It comes without any warranty, to
-* the extent permitted by applicable law. You can redistribute it
-* and/or modify it under the terms of the Do What The Fuck You Want
-* To Public License, Version 2, as published by Sam Hocevar. See
-* http://sam.zoy.org/wtfpl/COPYING for more details.
-*
-* TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-*
-* 0. You just DO WHAT THE FUCK YOU WANT TO.
-*
-* */
-
+ * (Kaikz ~ http://pwncraft.net)
+ *
+ * THIS PLUGIN IS LICENSED UNDER THE WTFPL - (Do What The Fuck You Want To Public License)
+ *
+ * This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://sam.zoy.org/wtfpl/COPYING for more details.
+ *
+ * TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+ *
+ * 0. You just DO WHAT THE FUCK YOU WANT TO.
+ *
+ * */
 package net.pwncraft.kaikz.armorslots;
 
 import com.nijiko.permissions.PermissionHandler;
@@ -39,19 +38,17 @@ import org.bukkit.plugin.PluginManager;
  *
  * @author Kaikz
  */
-
 public class ArmorSlots extends JavaPlugin {
+
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
     private final ASPlayerListener playerListener = new ASPlayerListener(this);
     private final ASEntityListener entityListener = new ASEntityListener(this);
     private final ASWeatherListener weatherListener = new ASWeatherListener(this);
-    
     // Console logger
     static final Logger log = Logger.getLogger("Minecraft");
-    
     // Permissions
     public static PermissionHandler Permissions = null;
-    
+    public static boolean permsPlugin;
     // Stuff
     public ItemStack hat;
     public ItemStack chestplate;
@@ -65,32 +62,49 @@ public class ArmorSlots extends JavaPlugin {
         pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.WEATHER_CHANGE, weatherListener, Priority.Normal, this);
-        
+
         setupPermissions();
-       
+
         PluginDescriptionFile pdfFile = this.getDescription();
-        System.out.println(pdfFile.getName() + " v" + pdfFile.getVersion() + " is enabled!" );
+        System.out.println(pdfFile.getName() + " v" + pdfFile.getVersion() + " is enabled!");
     }
-    
+
     private void setupPermissions() {
         Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
-        
+
         if (ArmorSlots.Permissions == null) {
             if (permissionsPlugin != null) {
                 ArmorSlots.Permissions = ((Permissions) permissionsPlugin).getHandler();
+                permsPlugin = true;
             } else {
-                log.info("[ArmorSlots] Permissions system not found. Disabling.");
-                getServer().getPluginManager().disablePlugin(this);
+                log.info("[ArmorSlots] Permissions plugin not found. Using SuperPerms.");
+                permsPlugin = false;
             }
         }
     }
     
+    public static boolean hasPermission(Player player, String perms) {
+        if (permsPlugin) {
+            if (Permissions.has(player, perms)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (player.hasPermission(perms)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     @Override
     public void onDisable() {
         PluginDescriptionFile pdfFile = this.getDescription();
-        System.out.println(pdfFile.getName() + " v" + pdfFile.getVersion() + " is disabled!" );
+        System.out.println(pdfFile.getName() + " v" + pdfFile.getVersion() + " is disabled!");
     }
-    
+
     public boolean isDebugging(final Player player) {
         if (debugees.containsKey(player)) {
             return debugees.get(player);
@@ -102,13 +116,13 @@ public class ArmorSlots extends JavaPlugin {
     public void setDebugging(final Player player, final boolean value) {
         debugees.put(player, value);
     }
-    
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        Player player = (Player)sender;
-        
+        Player player = (Player) sender;
+
         if (commandLabel.equalsIgnoreCase("hat")) {
-            if (Permissions.has(player, "armorslots.hat")) {
+            if (hasPermission(player, "armorslots.hat")) {
                 if (player.getItemInHand().getTypeId() == 0) {
                     player.sendMessage(ChatColor.RED + "You have nothing in your hand!");
                     return true;
@@ -129,7 +143,7 @@ public class ArmorSlots extends JavaPlugin {
                 }
             }
         } else if (commandLabel.equalsIgnoreCase("chestplate")) {
-            if (Permissions.has(player, "armorslots.chestplate")) {
+            if (hasPermission(player, "armorslots.chestplate")) {
                 if (player.getItemInHand().getTypeId() == 0) {
                     player.sendMessage(ChatColor.RED + "You have nothing in your hand!");
                     return true;
@@ -150,7 +164,7 @@ public class ArmorSlots extends JavaPlugin {
                 }
             }
         } else if (commandLabel.equalsIgnoreCase("leggings")) {
-            if (Permissions.has(player, "armorslots.leggings")) {
+            if (hasPermission(player, "armorslots.leggings")) {
                 if (player.getItemInHand().getTypeId() == 0) {
                     player.sendMessage(ChatColor.RED + "You have nothing in your hand!");
                     return true;
@@ -171,7 +185,7 @@ public class ArmorSlots extends JavaPlugin {
                 }
             }
         } else if (commandLabel.equalsIgnoreCase("boots")) {
-            if (Permissions.has(player, "armorslots.boots")) {
+            if (hasPermission(player, "armorslots.boots")) {
                 if (player.getItemInHand().getTypeId() == 0) {
                     player.sendMessage(ChatColor.RED + "You have nothing in your hand!");
                     return true;
@@ -192,7 +206,7 @@ public class ArmorSlots extends JavaPlugin {
                 }
             }
         } else if (commandLabel.equalsIgnoreCase("firearmor")) {
-            if (Permissions.has(player, "armorslots.firearmor")) {
+            if (hasPermission(player, "armorslots.firearmor")) {
                 if (fireArmor == false) {
                     player.setFireTicks(90000);
                     fireArmor = true;
