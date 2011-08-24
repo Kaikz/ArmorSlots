@@ -16,8 +16,6 @@
  * */
 package net.pwncraft.kaikz.armorslots;
 
-import com.nijiko.permissions.PermissionHandler;
-import com.nijikokun.bukkit.Permissions.Permissions;
 import java.util.HashMap;
 import java.util.logging.Logger;
 import org.bukkit.ChatColor;
@@ -46,9 +44,6 @@ public class ArmorSlots extends JavaPlugin {
     private final ASWeatherListener weatherListener = new ASWeatherListener(this);
     // Console logger
     static final Logger log = Logger.getLogger("Minecraft");
-    // Permissions
-    public static PermissionHandler Permissions = null;
-    public static boolean permsPlugin;
     // Stuff
     public ItemStack hat;
     public ItemStack chestplate;
@@ -63,39 +58,15 @@ public class ArmorSlots extends JavaPlugin {
         pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.WEATHER_CHANGE, weatherListener, Priority.Normal, this);
 
-        setupPermissions();
-
         PluginDescriptionFile pdfFile = this.getDescription();
         System.out.println(pdfFile.getName() + " v" + pdfFile.getVersion() + " is enabled!");
     }
-
-    private void setupPermissions() {
-        Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
-
-        if (ArmorSlots.Permissions == null) {
-            if (permissionsPlugin != null) {
-                ArmorSlots.Permissions = ((Permissions) permissionsPlugin).getHandler();
-                permsPlugin = true;
-            } else {
-                log.info("[ArmorSlots] Permissions plugin not found. Using SuperPerms.");
-                permsPlugin = false;
-            }
-        }
-    }
     
     public static boolean hasPermission(Player player, String perms) {
-        if (permsPlugin) {
-            if (Permissions.has(player, perms)) {
-                return true;
-            } else {
-                return false;
-            }
+        if (player.hasPermission(perms)) {
+            return true;
         } else {
-            if (player.hasPermission(perms)) {
-                return true;
-            } else {
-                return false;
-            }
+            return false;
         }
     }
 

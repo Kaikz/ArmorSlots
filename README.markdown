@@ -2,10 +2,6 @@
 
 Store blocks/items in your armor slots.
 
-### Requires
-- Permissions 2.6+
-- Bukkit Permissions (RB #1000)
-
 ### Commands
 - /hat
 - /chestplate
@@ -27,6 +23,9 @@ Store blocks/items in your armor slots.
 - armorslots.explosion(Allows TNT hat perks)
 
 ### Changelog:
+#### 1.4.1. Wednesday, August 24
+- Removed Permissions 2.7/3 support. Now uses Bukkit SuperPerms. Use bPerms or PEX if you must.
+
 #### 1.4. Sunday, July 24
 - Added Bukkit SuperPerms support. (no need for a plugin -> Bukkit bridge)
 
