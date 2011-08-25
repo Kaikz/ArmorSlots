@@ -103,8 +103,12 @@ public class ArmorSlots extends JavaPlugin {
                     if (inventory.getHelmet().getTypeId() != 0) {
                         hat = inventory.getHelmet();
                     }
-                    inventory.remove(itemHand);
-                    inventory.setHelmet(itemHand);
+                    inventory.setHelmet(new ItemStack(itemHand.getTypeId(), 1));
+                    if (itemHand.getAmount() > 1) {
+                        itemHand.setAmount(itemHand.getAmount() - 1);
+                    } else {
+                        inventory.remove(itemHand);
+                    }
                     if (hat != null) {
                         inventory.setItemInHand(hat);
                     }
@@ -124,8 +128,12 @@ public class ArmorSlots extends JavaPlugin {
                     if (inventory.getChestplate().getTypeId() != 0) {
                         chestplate = inventory.getChestplate();
                     }
-                    inventory.remove(itemHand);
-                    inventory.setChestplate(itemHand);
+                    inventory.setChestplate(new ItemStack(itemHand.getTypeId(), 1));
+                    if (itemHand.getAmount() > 1) {
+                        itemHand.setAmount(itemHand.getAmount() - 1);
+                    } else {
+                        inventory.remove(itemHand);
+                    }
                     if (chestplate != null) {
                         inventory.setItemInHand(chestplate);
                     }
@@ -145,8 +153,12 @@ public class ArmorSlots extends JavaPlugin {
                     if (inventory.getLeggings().getTypeId() != 0) {
                         leggings = inventory.getLeggings();
                     }
-                    inventory.remove(itemHand);
-                    inventory.setLeggings(itemHand);
+                    inventory.setLeggings(new ItemStack(itemHand.getTypeId(), 1));
+                    if (itemHand.getAmount() > 1) {
+                        itemHand.setAmount(itemHand.getAmount() - 1);
+                    } else {
+                        inventory.remove(itemHand);
+                    }
                     if (leggings != null) {
                         inventory.setItemInHand(leggings);
                     }
@@ -166,8 +178,12 @@ public class ArmorSlots extends JavaPlugin {
                     if (inventory.getBoots().getTypeId() != 0) {
                         boots = inventory.getBoots();
                     }
-                    inventory.remove(itemHand);
-                    inventory.setBoots(itemHand);
+                    inventory.setBoots(new ItemStack(itemHand.getTypeId(), 1));
+                    if (itemHand.getAmount() > 1) {
+                        itemHand.setAmount(itemHand.getAmount() - 1);
+                    } else {
+                        inventory.remove(itemHand);
+                    }
                     if (boots != null) {
                         inventory.setItemInHand(boots);
                     }

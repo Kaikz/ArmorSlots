@@ -3,7 +3,7 @@ author: Kaikz
 website: http://pwncraft.net/
 description: Store blocks in armor slots. 
 main: net.pwncraft.kaikz.armorslots.ArmorSlots
-version: 1.4.1
+version: 1.5
 commands:
   hat:
     description: Sets the item in your hand to your head.

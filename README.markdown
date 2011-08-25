@@ -23,6 +23,9 @@ Store blocks/items in your armor slots.
 - armorslots.explosion(Allows TNT hat perks)
 
 ### Changelog:
+#### 1.5. Thursday, August 25
+- Fixed the removal of entire stacks, sorta. Removes 1 from the stack if there's more than one, but if there's multiple stacks of the same amount, it will remove all of those stacks.
+
 #### 1.4.1. Wednesday, August 24
 - Removed Permissions 2.7/3 support. Now uses Bukkit SuperPerms. Use bPerms or PEX if you must.
 
