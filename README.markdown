@@ -1,13 +1,13 @@
 ## ArmorSlots
 
-Store blocks/items in your armor slots.
+Set of utilities to handle all your armor needs.
 
 ### Commands
 - /hat
 - /chestplate
 - /leggings
 - /boots
-- /firearmor
+- /armor [type]
 
 ### Permissions
 - armorslots.hat
@@ -15,6 +15,11 @@ Store blocks/items in your armor slots.
 - armorslots.leggings
 - armorslots.boots
 - armorslots.firearmor (Allows fire armor)
+- armorslots.diamondarmor (Allows diamond armor)
+- armorslots.goldarmor (Allows gold armor)
+- armorslots.ironarmor (Allows iron armor)
+- armorslots.leatherarmor (Allows leather armor)
+- armorslots.chainmailarmor (Allows chainmail armor)
 - armorslots.fallboots (Allows no fall damage on gold boots)
 - armorslots.void (Allows portal hat perks)
 - armorslots.contact(Allows cactus hat perks)
@@ -23,6 +28,10 @@ Store blocks/items in your armor slots.
 - armorslots.explosion(Allows TNT hat perks)
 
 ### Changelog:
+#### 1.6. Sunday, August 28
+- Added the '/armor' command. Allows the player to set a full set of armor.
+- Changed '/firearmor' to '/armor fire'. Permission is still the same.
+
 #### 1.5. Thursday, August 25
 - Fixed the removal of entire stacks, sorta. Removes 1 from the stack if there's more than one, but if there's multiple stacks of the same amount, it will remove all of those stacks.
 
