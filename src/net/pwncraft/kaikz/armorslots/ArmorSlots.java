@@ -107,7 +107,7 @@ public class ArmorSlots extends JavaPlugin {
                     if (inventory.getHelmet().getTypeId() != 0) {
                         hat = inventory.getHelmet();
                     }
-                    inventory.setHelmet(new ItemStack(itemHand.getTypeId(), 1));
+                    inventory.setHelmet(new ItemStack(itemHand.getTypeId(), 1, itemHand.getDurability()));
                     if (itemHand.getAmount() > 1) {
                         itemHand.setAmount(itemHand.getAmount() - 1);
                     } else {
@@ -132,7 +132,7 @@ public class ArmorSlots extends JavaPlugin {
                     if (inventory.getChestplate().getTypeId() != 0) {
                         chestplate = inventory.getChestplate();
                     }
-                    inventory.setChestplate(new ItemStack(itemHand.getTypeId(), 1));
+                    inventory.setChestplate(new ItemStack(itemHand.getTypeId(), 1, itemHand.getDurability()));
                     if (itemHand.getAmount() > 1) {
                         itemHand.setAmount(itemHand.getAmount() - 1);
                     } else {
@@ -157,7 +157,7 @@ public class ArmorSlots extends JavaPlugin {
                     if (inventory.getLeggings().getTypeId() != 0) {
                         leggings = inventory.getLeggings();
                     }
-                    inventory.setLeggings(new ItemStack(itemHand.getTypeId(), 1));
+                    inventory.setLeggings(new ItemStack(itemHand.getTypeId(), 1, itemHand.getDurability()));
                     if (itemHand.getAmount() > 1) {
                         itemHand.setAmount(itemHand.getAmount() - 1);
                     } else {
@@ -182,7 +182,7 @@ public class ArmorSlots extends JavaPlugin {
                     if (inventory.getBoots().getTypeId() != 0) {
                         boots = inventory.getBoots();
                     }
-                    inventory.setBoots(new ItemStack(itemHand.getTypeId(), 1));
+                    inventory.setBoots(new ItemStack(itemHand.getTypeId(), 1, itemHand.getDurability()));
                     if (itemHand.getAmount() > 1) {
                         itemHand.setAmount(itemHand.getAmount() - 1);
                     } else {

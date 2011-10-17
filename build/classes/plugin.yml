@@ -3,7 +3,7 @@ author: Kaikz
 website: http://pwncraft.net/
 description: Store blocks in armor slots. 
 main: net.pwncraft.kaikz.armorslots.ArmorSlots
-version: 1.6
+version: 1.7
 commands:
   hat:
     description: Sets the item in your hand to your head.
@@ -16,9 +16,6 @@ commands:
     usage: /<command>
   boots:
     description: Sets the item in your hand to your boots.
-    usage: /<command>
-  firearmor:
-    description: Looks as if you're on fire.
     usage: /<command>
   armor:
     description: Base command for setting armor.
