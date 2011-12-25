@@ -14,7 +14,7 @@
  * 0. You just DO WHAT THE FUCK YOU WANT TO.
  *
  * */
-package net.pwncraft.kaikz.armorslots;
+package me.freeplaynz.armorslots;
 
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.weather.WeatherListener;

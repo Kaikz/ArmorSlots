@@ -1,8 +1,8 @@
 name: ArmorSlots
 author: Kaikz
-website: http://pwncraft.net/
+website: http://freeplaynz.me
 description: Store blocks in armor slots. 
-main: net.pwncraft.kaikz.armorslots.ArmorSlots
+main: me.freeplaynz.armorslots.ArmorSlots
 version: 1.7
 commands:
   hat:
