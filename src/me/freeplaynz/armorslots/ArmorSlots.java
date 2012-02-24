@@ -1,5 +1,5 @@
 /*
- * (Kaikz ~ http://pwncraft.net)
+ * (Kaikz ~ http://freeplaynz.me)
  *
  * THIS PLUGIN IS LICENSED UNDER THE WTFPL - (Do What The Fuck You Want To Public License)
  *
@@ -16,21 +16,15 @@
  * */
 package me.freeplaynz.armorslots;
 
-import java.util.HashMap;
-import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.event.Event;
-import org.bukkit.event.Event.Priority;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.PluginManager;
 
 /**
  * ArmorSlots for Bukkit
@@ -38,13 +32,6 @@ import org.bukkit.plugin.PluginManager;
  * @author Kaikz
  */
 public class ArmorSlots extends JavaPlugin {
-
-    private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
-    private final ASPlayerListener playerListener = new ASPlayerListener(this);
-    private final ASEntityListener entityListener = new ASEntityListener(this);
-    private final ASWeatherListener weatherListener = new ASWeatherListener(this);
-    // Console logger
-    static final Logger log = Logger.getLogger("Minecraft");
     // Stuff
     public ItemStack hat;
     public ItemStack chestplate;
@@ -54,11 +41,7 @@ public class ArmorSlots extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        PluginManager pm = getServer().getPluginManager();
-        pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.Normal, this);
-        pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Normal, this);
-        pm.registerEvent(Event.Type.WEATHER_CHANGE, weatherListener, Priority.Normal, this);
-
+        getServer().getPluginManager().registerEvents(new ASListener(), this);
         PluginDescriptionFile pdfFile = this.getDescription();
         System.out.println(pdfFile.getName() + " v" + pdfFile.getVersion() + " is enabled!");
     }
@@ -75,18 +58,6 @@ public class ArmorSlots extends JavaPlugin {
     public void onDisable() {
         PluginDescriptionFile pdfFile = this.getDescription();
         System.out.println(pdfFile.getName() + " v" + pdfFile.getVersion() + " is disabled!");
-    }
-
-    public boolean isDebugging(final Player player) {
-        if (debugees.containsKey(player)) {
-            return debugees.get(player);
-        } else {
-            return false;
-        }
-    }
-
-    public void setDebugging(final Player player, final boolean value) {
-        debugees.put(player, value);
     }
 
     @Override

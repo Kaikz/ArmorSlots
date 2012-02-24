@@ -3,7 +3,7 @@ author: Kaikz
 website: http://freeplaynz.me
 description: Store blocks in armor slots. 
 main: me.freeplaynz.armorslots.ArmorSlots
-version: 1.7
+version: 1.8
 commands:
   hat:
     description: Sets the item in your hand to your head.
